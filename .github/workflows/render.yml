@@ -18,7 +18,9 @@ jobs:
           echo "n=$n" >> "$GITHUB_OUTPUT"
       - name: Get the renderer
         if: steps.peek.outputs.n != '0'
-        run: curl -fsS -H "x-reel-token: $REEL_TOKEN" "$API/reel/bundle" -o b.tgz && tar xzf b.tgz
+        run: |
+          curl -fsS -H "x-reel-token: $REEL_TOKEN" "$API/reel/bundle" -o b.tgz
+          tar xzf b.tgz
       - uses: actions/setup-node@v4
         if: steps.peek.outputs.n != '0'
         with:
